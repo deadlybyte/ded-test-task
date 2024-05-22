@@ -1,42 +1,52 @@
-# ded-test-james
+# ded-test-task
 
 ## Task
 
--   Create basic end-to-end test suites for the Demilitarise Education (dED) website using several different Javascript testing frameworks, so that we can evaluate their suitability. Examples of features to test are given below.
--   It must be possible to configure the frameworks to run the same test on different base URLs:
+Port three basic end-to-end tests for the Demilitarise Education (dED) website from one Javascript testing framework ([Cypress](https://www.cypress.io/)) to another ([Playwright](https://playwright.dev/)).
+
+Specific requirements are as follows:
+
+-   It must be possible to configure the frameworks to run the same tests on different base URLs for different instances:
     -   [The dED staging site](https://staging.ded1.co/)
     -   [The dED production site](https://ded1.co/)
     -   A local instance, eg. http://localhost:8000 (Not relevant for your tasks, but necessary later)
--   Add simple notes to this README, to show how to run each test suite:
+-   Add simple notes to this README, to show how to run the Playwright tests:
     -   In a GUI
     -   from the command line
     -   for different root URLs (eg. staging or production site)
--   Optionally add any notes of your own about the pros and cons of each suite in terms of suitability for use with the dED website.
 
 
-## Frameworks
+## Playwright
 
-The frameworks we would like to evaluate are below, in order of priority. It is not necessary to complete all of them before our next meeting. It is more valuable to us to complete the list of tests fully for each one before moving on to the next. 
+It is not necessary for candidates to have previous knowledge of either Playwright or Cypress. With a firm grasp of ES6 in general the tests should be comprehensible.
 
--   [Jest](https://jestjs.io/)
--   [Playwright](https://playwright.dev/)
--   [Cypress](https://www.cypress.io/)
+Candidates are expected to refer to the excellent [Playwright documentation](https://playwright.dev/docs/intro) to familiarise themselves with the basics. This documentation should be more than sufficient to complete these tasks.
+
+
+## Prerequisites
+
+-   A command line application, such as the Linux or OSX terminal, or the Windows Subsystem for Linux.
+-   [Git](https://git-scm.com/) installed
+-   [Node Package Manager](https://docs.npmjs.com/) installed
+-   Basic fluency with the command line, Git and ES6
 
 
 ## Tests
 
--   Test the home page
+The following tests are conducted by the Cypress test files, and candidates are expected to produce Playwright tests which do the same:
+
+-   Test the home page (`cypress/cypress/e2e/home.cy.ts`):
     -   Visit the site root (`<BASE_URL>/`)
     -   Ensure there are no Javascript errors in the console
     -   Ensure the element `p.ded-total-investment` is present
     -   Ensure it contains an value, higher than 1bn, beginning with a pound sign (`£`)
--   Test basic navigation
+-   Test basic navigation (`cypress/cypress/e2e/treaty.cy.ts`):
     -   Visit the site root (`<BASE_URL>/`)
     -   Find a link `<a>` with href `/how-we-do-it`, and click it
     -   Find a heading `<h2>` with text “treaty”, and click it
     -   Ensure there is a heading with the text “The Demilitarise Education Treaty”
     -   Ensure the URL is `<BASE_URL>/how-we-do-it/treaty`
--   Test university search
+-   Test university search (`cypress/cypress/e2e/university-search.cy.ts`):
     -   Visit the site root (`<BASE_URL>/`)
     -   Find the element `input.ded-input-search-university`, and enter the string `bri`
     -   Ensure an element appears with text “University of the West of England, Bristol”, and click it
@@ -51,4 +61,48 @@ The frameworks we would like to evaluate are below, in order of priority. It is 
         -   “actions”
 
 
+## Instructions to run Cypress tests
+
+Beginning in the directory `cypress`:
+
+Install dependencies:
+
+```
+npm ci
+```
+
+Run all tests on staging server/production server (see `package.json` scripts):
+
+```
+npm run cypress:staging run
+npm run cypress:production run
+```
+
+Run a specific test on staging server server, eg. `university-search`:
+
+```
+npm run cypress:staging run -- --spec 'cypress/e2e/university-search.cy.ts'
+```
+
+Run all tests on staging server with GUI:
+
+```
+npm run cypress:staging open
+```
+
+At the GUI
+
+-   Click “E2E Testing”
+-   Choose a browser, eg. Chrome
+-   Click “Start E2E Testing in ...”
+-   Click any test to run it, eg. “home.cy.ts”
+
+
+## Instructions to run Playwright tests
+
+Beginning in the directory `playwright`:
+
+---
+
+Candidates are expected to complete this section of the documentation, in the style of the Cypress section above.
 
