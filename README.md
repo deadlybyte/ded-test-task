@@ -102,7 +102,46 @@ At the GUI
 
 Beginning in the directory `playwright`:
 
----
+Install dependencies:
 
-Candidates are expected to complete this section of the documentation, in the style of the Cypress section above.
+```
+npm ci
+```
 
+Run all tests on staging server/production server (see `package.json` scripts):
+
+```
+npm run playwright:staging
+npm run playwright:production
+```
+
+Alternatively if you want to run the tests against a local dev instance then run the following:
+
+```
+npx playwright test
+```
+
+**Note:** The `BASE_URL` environnent variable defaults to *http://localhost:8000*, if this differs from your setup then set the `BASE_URL` environment variable before running the above command. For example
+
+```
+BASE_URL=http://localhost:3000 npx playwright test
+```
+
+Run a specific test on staging server server, eg. `university-search`:
+
+```
+npm run playwright:staging -- university-search
+```
+
+Run all tests on staging server with GUI:
+
+```
+npm run playwright:staging -- --ui
+```
+
+At the GUI
+
+-   Click ">" button to filter which tests are executed
+-   Choose a browser, eg. chromium
+-   Click either an individual test or suite of tests under the "TESTS" section
+-   Click the "Run" button next to the selected test or suite of tests to run it, eg. “home.spec.ts”
