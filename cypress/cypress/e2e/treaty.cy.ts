@@ -10,7 +10,7 @@ describe('treaty', () => {
         expect(loc.pathname).to.equal("/how-we-do-it");
     });
 
-    cy.get(`h2`).contains("treaty").click();
+    cy.get(`a`).contains("treaty").click();
     
     cy.location().should(loc => {
         expect(loc.pathname).to.equal("/how-we-do-it/treaty");
